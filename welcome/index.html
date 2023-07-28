@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/welcome/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo2.gif">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="/welcome/script.js"></script>
+    <title>欢迎</title>
+</head>
+<body style="overflow:hidden">
+    <div style="width: 100%;height: 70px;background-color: rgb(1, 0, 2);" class="flex">
+        <div style="flex:1;height: 70px;background-color: rgb(0, 0, 0);">
+            <img src="/images/logo.png" width="60%" height="70px" style="margin-left:10% ;">
+        </div>
+        <div style="flex:4;height: 70px;"></div>
+        <div style="flex:1;height: 70px;background-color: rgb(1,0,2);" class="flex">
+            <div style="height: 70px;flex:1;"></div>
+            <div style="height: 70px;flex:1;">
+                <button style="color: white;border: 0px;background-color: rgb(183, 48, 38);cursor: pointer;font-size: large;text-align: center;width: 100%;height:100%;" onclick="login()">登陆/注册</button>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;height: 100vh;background-color: rgb(30,30,30);">
+        <div id="canvas-container"></div>
+
+  <script src="https://threejs.org/build/three.js"></script>
+  <script>
+    var scene = new THREE.Scene();
+    var textureLoader = new THREE.TextureLoader();
+    var texture = textureLoader.load('/images/welcome.png');
+    scene.background = texture;
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById("canvas-container").appendChild(renderer.domElement);
+    var geometry = new THREE.SphereGeometry(1.8, 64, 64);
+    var texture = new THREE.TextureLoader().load('/images/welcome.jpg');
+    var material = new THREE.MeshPhongMaterial({ map: texture });
+    var sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+    sphere.position.set(0, 0, 0);
+    var light = new THREE.PointLight("white", 2);
+    light.position.set(0, 1, 5);
+    light.distance = 10; 
+    light.decay = 2; 
+    scene.add(light);
+    function animate() {
+      requestAnimationFrame(animate);
+      sphere.rotation.y -= -0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
+    var target = new THREE.Vector3(10, -5, 10);
+    sphere.lookAt(target); 
+  </script>
+        <div style="position: absolute;top:70px;text-align: center;width: 100%;">
+            <br>
+            <font style="font-size: 50px;color: white;" >欢迎大家来到夕宁云办公</font>
+        </div>
+        <div style="position: absolute;top:70%;left: 45%;">
+            <a href="/login/index.html">
+                <button style="background-color: blue;cursor: pointer;width: 150px;height: 60px;border-radius: 10%;">
+                    <font style="font-size: 25px;color: white;" >立即体验</font>
+                </button>
+            </a>
+        </div>
+        </a>
+    </div>
+</body>
+</html>
